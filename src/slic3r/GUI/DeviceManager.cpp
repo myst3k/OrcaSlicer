@@ -16,6 +16,7 @@
 #include <codecvt>
 #include <boost/foreach.hpp>
 #include <boost/typeof/typeof.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
@@ -410,6 +411,7 @@ std::string MachineObject::get_access_code() const
 
 void MachineObject::set_access_code(std::string code, bool only_refresh)
 {
+    boost::algorithm::trim(code);
     this->access_code = code;
     if (only_refresh) {
         AppConfig* config = GUI::wxGetApp().app_config;
@@ -436,6 +438,7 @@ void MachineObject::erase_user_access_code()
 
 void MachineObject::set_user_access_code(std::string code, bool only_refresh)
 {
+    boost::algorithm::trim(code);
     this->user_access_code = code;
     if (only_refresh && !code.empty()) {
         AppConfig* config = GUI::wxGetApp().app_config;
